@@ -115,8 +115,8 @@ function removeFalsyValues(arr) {
  *    => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ],
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
-function getUpperCaseStrings(/* arr */) {
-  throw new Error('Not implemented');
+function getUpperCaseStrings(arr) {
+  return arr.map((elem) => elem.toUpperCase());
 }
 
 
@@ -234,8 +234,20 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+
+function getMovingSum(arr) {
+  const fun = (acc, elem, index) => {
+    let value;
+    if (acc[index - 1] === undefined) {
+      value = 0;
+    } else {
+      value = acc[index - 1];
+    }
+    acc.push(value + elem);
+    return acc;
+  };
+  const newArr = arr.reduce(fun, []);
+  return newArr;
 }
 
 /**
@@ -469,8 +481,9 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array(n).fill(Array(n).fill())
+    .map((el, i) => el.map((_, j) => (i === j ? 1 : 0)));
 }
 
 /**
@@ -486,8 +499,18 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const arr = new Array(end - start + 1);
+  arr.fill(0);
+  function func(acc, _, ind) {
+    if (ind !== 0) {
+      const a = acc[ind - 1] + 1;
+      acc.push(a);
+    }
+    return acc;
+  }
+  const newArr = arr.reduce(func, [start]);
+  return newArr;
 }
 
 /**
@@ -501,8 +524,13 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  return arr.reduce((acc, elem) => {
+    if (!acc.includes(elem)) {
+      acc.push(elem);
+    }
+    return acc;
+  }, []);
 }
 
 /**

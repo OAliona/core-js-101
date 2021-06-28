@@ -62,8 +62,10 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...params) {
+  return function polynom(x) {
+    return params.reduce((acc, item, i) => acc + item * (x ** (params.length - 1 - i)), 0);
+  };
 }
 
 
